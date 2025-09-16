@@ -16,8 +16,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 # Inicializar Django
 django.setup()
 
-# Solo en Vercel, inicializar la base de datos
-if os.environ.get('VERCEL'):
+# Solo en Vercel con SQLite, inicializar la base de datos
+if os.environ.get('VERCEL') and not os.environ.get('DATABASE_URL') and not os.environ.get('DB_HOST'):
     from django.core.management import call_command
     from api_request.models import Usuario
     
