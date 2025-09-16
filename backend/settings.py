@@ -191,14 +191,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Security settings for production
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-
-# Database configuration for Vercel (usar SQLite por defecto)
-import os
-if os.environ.get('VERCEL'):
-    # Para producción en Vercel, usar base de datos en memoria
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
-        }
-    }
