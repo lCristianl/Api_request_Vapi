@@ -81,11 +81,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 if os.environ.get('DATABASE_URL'):
     # Producción con Supabase/PostgreSQL
     import dj_database_url
+    database_url = os.environ.get('DATABASE_URL')
+    print(f"Using DATABASE_URL: {database_url[:50]}...")  # Debug log
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        'default': dj_database_url.parse(database_url)
     }
 elif os.environ.get('DB_HOST'):
     # Configuración manual de PostgreSQL
+    print("Using manual DB configuration")  # Debug log
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -101,6 +104,7 @@ elif os.environ.get('DB_HOST'):
     }
 else:
     # Desarrollo local con SQLite
+    print("Using SQLite for development")  # Debug log
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',

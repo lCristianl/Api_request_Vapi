@@ -7,7 +7,7 @@ Ve a tu proyecto en Vercel → **Settings** → **Environment Variables** y agre
 ### 📋 **Variables Requeridas:**
 
 ```bash
-# Configuración de Base de Datos
+# Configuración de Base de Datos (URL CORREGIDA)
 DATABASE_URL = postgres://postgres.wcspwemadhshmqbfqsjn:HXdOX4PVMm7lMNad@db.wcspwemadhshmqbfqsjn.supabase.co:5432/postgres?sslmode=require
 
 # Configuración de Django
