@@ -83,8 +83,18 @@ if os.environ.get('DATABASE_URL'):
     import dj_database_url
     database_url = os.environ.get('DATABASE_URL')
     print(f"Using DATABASE_URL: {database_url[:50]}...")  # Debug log
+    
+    # Parse la URL y agregar configuraciones específicas para Vercel
+    db_config = dj_database_url.parse(database_url)
+    db_config['OPTIONS'] = {
+        'sslmode': 'require',
+        'connect_timeout': 60,
+        'application_name': 'vercel_django_app',
+    }
+    db_config['CONN_MAX_AGE'] = 0  # No persistent connections
+    
     DATABASES = {
-        'default': dj_database_url.parse(database_url)
+        'default': db_config
     }
 elif os.environ.get('DB_HOST'):
     # Configuración manual de PostgreSQL
@@ -99,7 +109,9 @@ elif os.environ.get('DB_HOST'):
             'PORT': os.environ.get('DB_PORT', '5432'),
             'OPTIONS': {
                 'sslmode': 'require',
+                'connect_timeout': 60,
             },
+            'CONN_MAX_AGE': 0,
         }
     }
 else:
